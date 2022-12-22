@@ -1,0 +1,97 @@
+<div class="container">
+    <mat-card class="card-container">
+        <mat-card-title>Add Org Memeber</mat-card-title>
+        <form [formGroup]="addMemeberForm" (ngSubmit)="onSubmit()" novalidate class="d-flex-center">
+            <mat-card-content class="card-content">
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Username</mat-label>
+                    <input matInput formControlName="username">
+                    <mat-error
+                        *ngIf="addMemeberForm.get('username')?.invalid && (addMemeberForm.get('username')?.dirty || addMemeberForm.get('username')?.touched) && addMemeberForm.get('username')?.errors?.required">
+                        Username is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="password">
+                    <mat-error *ngIf="!addMemeberForm.get('password')?.errors?.required">
+                        Use at least 8 characters. Include uppercase letter, number and special character
+                    </mat-error>
+                    <mat-error
+                        *ngIf="addMemeberForm.get('password')?.invalid && (addMemeberForm.get('password')?.dirty || addMemeberForm.get('password')?.touched) && addMemeberForm.get('password')?.errors?.required">
+                        Password is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Confirm Password</mat-label>
+                    <input matInput type="password" formControlName="confirmPassword">
+                    <mat-error *ngIf="addMemeberForm.get('confirmPassword')?.errors">
+                        should be same as above
+                    </mat-error>
+                    <mat-error
+                        *ngIf="addMemeberForm.get('confirmPassword')?.invalid && (addMemeberForm.get('confirmPassword')?.dirty || addMemeberForm.get('confirmPassword')?.touched) && addMemeberForm.get('confirmPassword')?.errors?.required">
+                        Password is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email">
+                    <mat-error
+                        *ngIf="!addMemeberForm.get('email')?.errors?.required && (addMemeberForm.get('email')?.errors?.pattern)">
+                        Please enter a valid email address
+                    </mat-error>
+                    <mat-error
+                        *ngIf="addMemeberForm.get('email')?.invalid && (addMemeberForm.get('email')?.dirty || addMemeberForm.get('email')?.touched) && addMemeberForm.get('email')?.errors?.required">
+                        Email is required
+                    </mat-error>
+                </mat-form-field>
+                <div class="form-field1">
+                    <mat-form-field class="dob-field">
+                        <mat-label>Date Of Birth</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="dateOfBirth" placeholder="MM/DD/YYYY"
+                            [max]="today">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error>
+                        Please enter a valid date
+                    </mat-error>
+                    </mat-form-field>
+                </div>
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Dept Description</mat-label>
+                    <mat-select [(value)]="selectedDept" (selectionChange)="onDeptChange($event)"
+                    formControlName="deptFormCtrl" required>
+                        <mat-option *ngFor="let dept of departments" [value]="dept.value">
+                        {{dept.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error>Please choose a Department</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>org Description</mat-label>
+                    <mat-select [(value)]="selectedOrg"
+                    formControlName="orgFormCtrl" required>
+                        <mat-option *ngFor="let org of organizations" [value]="org.value">
+                        {{org.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error >Please choose an Organization</mat-error>
+                </mat-form-field>
+                <mat-error *ngIf="errorMsg">
+                    {{errorMsg}}
+                </mat-error>
+            </mat-card-content>
+            <div class="footer">
+
+                <button style="margin-left: 25px;" [disabled]="!addMemeberForm.valid" color="primary" type="submit"  mat-raised-button mat-button>
+                    Add
+                </button>
+                <!-- <button class="submit-button" [disabled]="!addMemeberForm.valid" mat-mini-fab type="submit" color="primary" mat-raised-button mat-button>
+                    <mat-icon>arrow_forward</mat-icon>
+                </button> -->
+            </div>
+        </form>
+    </mat-card>
+</div>

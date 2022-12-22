@@ -1,0 +1,47 @@
+<mat-toolbar class="mat-elevation-z8">
+    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+        <mat-icon *ngIf="!sidenav.opened">
+            menu
+        </mat-icon>
+        <mat-icon *ngIf="sidenav.opened">
+            close
+        </mat-icon>
+    </button>
+    <span class="example-spacer"></span>
+</mat-toolbar>
+<mat-sidenav-container id="app-content">
+    <mat-sidenav #sidenav="matSidenav" class="sidenav">
+        <button mat-button class="menu-button" *ngFor="let item of menuItems" (click)="onMenuItemClick(item.id)">
+            <mat-icon style="
+            margin-right: 10px;
+        ">{{item.icon}}</mat-icon>
+            <span>{{item.name}}</span>
+        </button>
+    </mat-sidenav>
+
+    <mat-sidenav-content >
+
+        <div class="content mat-elevation-z8">
+            <div *ngIf="selectedMenuItem == 'create_ticket'">
+                <app-create-ticket></app-create-ticket>
+            </div>
+            
+            <div *ngIf="selectedMenuItem == 'ticket_history'">
+                <app-ticket-history></app-ticket-history>
+            </div>
+            <div *ngIf="selectedMenuItem == 'change_pwd'">
+                <app-change-password></app-change-password>
+            </div>
+            <div *ngIf="selectedMenuItem == 'update_avatar'">
+                <app-update-avatar></app-update-avatar>
+            </div>
+            
+        </div>
+        
+        
+    </mat-sidenav-content>
+</mat-sidenav-container>
+<div class="global-search-container">
+    <!-- <app-global-search class="global-search"></app-global-search> -->
+    <app-header-items></app-header-items>
+</div>

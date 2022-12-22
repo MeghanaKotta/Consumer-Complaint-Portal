@@ -1,0 +1,110 @@
+<div class="container">
+    <section class="header">
+        <div class="title-section">
+            <div class="title">
+                <div>{{headerInfo['title'] || 'Ticket Title'}}</div>
+            </div>
+            <div class="created-time">
+                <div>Created on : {{headerInfo['createdat'] && formatDate(headerInfo['createdat']) || '--/--/--'}}</div>
+            </div>
+        </div>
+        <div class="description">
+            <span class="desc">Description: </span><div  class="ticket-content" [innerHTML]="headerInfo['content']"></div>
+        </div>
+        <div class="tags-section">
+            <div>Tags : <img *ngFor="let imgsrc of tags" [src]="imgsrc" class="tags-icon"/></div>
+            <div>Solved : {{ticketStatus[headerInfo['status']]}}  
+<<<<<<< HEAD
+            <mat-icon *ngIf="headerInfo['isBookmarked']" class="bookmark" style="color: 	#FF8C00">star</mat-icon></div>
+=======
+            <mat-icon class="bookmark">{{headerInfo.isBookmarked ? 'bookmark': 'bookmark_border'}}</mat-icon></div>
+>>>>>>> 28545f8dc6f624784e154f3fd5838d3515518874
+        </div>
+    </section>
+    <section class="content">
+          <table class="ticket-table">
+            <thead>
+              <tr>
+                <th>SNo.</th>
+                <th>Assigned by</th>
+                <th>Worked by</th>
+                <th>Work done</th>
+                <th>Updated on</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor = "let item of contentInfo; let i = index;">
+                <tr>
+                    <td>{{i+1}}</td>
+                    <td>{{item.assignedBy || '--'}}</td>
+                    <td>{{item.worked_or_workingby || '--'}}</td>
+                    <td>{{item.workdone || '--'}}</td>
+                    <td>{{item.updatedon || '--'}}</td>
+                    <td class="tooltip"><mat-icon>list_alt</mat-icon><span class="tooltip-text">{{item.notes || 'No notes'}}</span></td>
+                </tr>
+              </ng-container>
+              </tbody>
+          </table>
+    </section>
+
+    <section class="footer" *ngIf="footerInfo; else view_footer;">
+        <form [formGroup]="editTicketForm" (ngSubmit)="onSubmit()">   
+            <div class="form-field">
+                <div class="field-col1" >
+                    <mat-form-field appearance="outline" *ngIf="isMoveOnEnabled">
+                        <mat-label>Work Done</mat-label>
+                        <textarea matInput rows="8" cols="40" formControlName="workDone"></textarea>
+                      </mat-form-field> 
+                </div>
+                <div class="field-col2">
+                    <div class="field-col2-row1">
+                        <mat-form-field *ngIf="isMoveOnEnabled" appearance="outline" class="selection-field">
+                            <mat-label>Assign To</mat-label>
+                            <mat-select [(value)]="selectedUser" formControlName="eligibleUserCtrl">
+                                <mat-option *ngFor="let item of eligibleUsers" [value]="item.userid">
+                                    {{item.username}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field *ngIf="isMoveOnEnabled" appearance="outline">
+                        <mat-label>Reason</mat-label>
+                        <textarea matInput rows="3" cols="50" formControlName="reason"></textarea>
+                      </mat-form-field> 
+                </div>
+                <div class="field-col3" *ngIf="isMoveOnEnabled">
+                    <mat-radio-group class="radio-group" color="primary" formControlName="action">
+                        <mat-radio-button class="radio-button" value="move" >Move</mat-radio-button>
+                        <mat-radio-button class="radio-button" value="close" >Close</mat-radio-button>
+                      </mat-radio-group>
+                    <button class="submit-button" color="primary" [disabled]="!editTicketForm.valid" type="submit"  mat-raised-button mat-button style="margin-left: 10px">
+                        Submit
+                    </button>
+
+                    <button color="primary" type="button"  mat-raised-button mat-button (click)="closeTickeView()" style="margin-left: 10px">
+
+                        Close
+                    </button>
+                </div>
+                <div *ngIf="!isMoveOnEnabled">
+                    <button class="submit-button" color="primary" [disabled]="!editTicketForm.valid" type="submit"  mat-raised-button mat-button>
+                        Assign To Me
+                    </button>
+                </div>
+            </div> 
+        </form>
+    </section>
+
+    <ng-template #view_footer>
+        <button color="primary" type="button"  mat-raised-button mat-button (click)="closeTickeView()" style="    float: right;
+        /* float: right; */
+        right: 55px;
+        margin-top: 20px;">
+
+            Close
+        </button>
+    </ng-template>
+
+</div>

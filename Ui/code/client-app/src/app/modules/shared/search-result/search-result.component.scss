@@ -1,0 +1,26 @@
+.result-content{
+    background-color: var(--secondary);
+    margin-top: 28px;
+    width: 325px;
+    float: right;
+    padding: 5px;
+    max-height: 100px;
+    position: absolute;
+    right: 0;
+    top:35px;
+}
+
+.search-item {
+    width: 94%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden !important;
+    height: 25px;
+    line-height: 25px;
+    list-style: none;
+    padding: 0px;
+}
+
+p {
+    margin: 0;
+}

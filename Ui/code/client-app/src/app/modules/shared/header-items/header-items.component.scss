@@ -1,0 +1,31 @@
+.header-item{
+    position: fixed;
+    top:10px;
+    right:10px;
+}
+
+.menu-items-container {
+    background-color: var(--secondary);
+    width: 11em;
+    /*height: 100%;*/
+    position: absolute;
+    top: 3.4em;
+    right: 0;
+    color:#444;
+}
+.listItems{
+    padding: 1em 1em;
+    cursor: pointer;
+}
+
+.menu-item-list{
+    font-size: 14px;
+    list-style: none;
+}
+.avatarId{
+    cursor: pointer;
+    padding-right: 16px;
+}
+.menu-item-list li:hover {
+    background-color: var(--li-over-bg) !important;   
+  }

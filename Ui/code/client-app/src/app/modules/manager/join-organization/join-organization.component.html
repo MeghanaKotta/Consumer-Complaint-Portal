@@ -1,0 +1,27 @@
+<div class="container">
+    <mat-card>
+        <mat-card-title>Join Organization</mat-card-title>
+        <form (ngSubmit)="onSubmit()" novalidate class="d-flex-center">
+            <mat-card-content>
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Dept Description</mat-label>
+                    <mat-select [(value)]="selectedDept" (selectionChange)="onDeptChange($event)">
+                        <mat-option *ngFor="let dept of departments" [value]="dept.value">
+                        {{dept.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>org Description</mat-label>
+                    <mat-select [(value)]="selectedOrg">
+                        <mat-option *ngFor="let org of organizations" [value]="org.value">
+                        {{org.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+    
+                <button type="button" (click)="onSubmit()" mat-raised-button color="primary" style="float: right">Add</button>
+            </mat-card-content>
+        </form>
+    </mat-card>
+</div>

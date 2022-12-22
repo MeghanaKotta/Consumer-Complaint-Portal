@@ -1,0 +1,80 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+	background-color: #037fa1;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.image-cropper {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    max-width: 30px;
+    max-height: 30px;
+    display: inline-flex;
+    top: 5px;
+    margin-right: 10px;
+  }
+  
+  .avatar {
+    display: inline;
+    margin: 0 auto;
+    height: 100%;
+    width: auto;
+  }
+
+table:not(table.mat-calendar-table),
+th:not(.mat-calendar-table th),
+tr:not(.mat-calendar-table tr),
+td:not(.mat-calendar-table td) {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+.global-search-container{
+	position: fixed;
+    top: 1.2em;
+    right: 9em;
+    z-index: 9;
+}
+.mat-toolbar-row, .mat-toolbar-single-row {
+  background-color: var(--primary) !important;
+}
+
+
+#app-content{
+  .mat-card,
+  .mat-drawer-container {
+    
+    background-color: white;
+  }
+}
+
+
+.global-search {
+  position: relative;
+}
+
+:root {
+  --primary: #037fa1;
+  --secondary: #36c2db;
+  --docker:#e6f0f3;
+  --li-over-bg:#3f8ba2;
+  --li-over-text:black;
+
+}

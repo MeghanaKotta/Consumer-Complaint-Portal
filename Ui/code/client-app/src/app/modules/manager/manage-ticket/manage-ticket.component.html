@@ -1,0 +1,158 @@
+<div class="manage-ticket-wrapper">
+    <div class="container">
+        <mat-card-title>Select Dept and Organization</mat-card-title>
+        <form  novalidate class="d-flex-center">
+            <mat-card-content>
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Dept Description</mat-label>
+                    <mat-select [(value)]="selectedDept" (selectionChange)="onDeptChange($event)"
+                    required>
+                        <mat-option *ngFor="let dept of departments" [value]="dept.value">
+                        {{dept.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error>Please choose a Department</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>org Description</mat-label>
+                    <mat-select [(value)]="selectedOrg" (selectionChange)="onOrgChange($event)"
+                    required>
+                        <mat-option *ngFor="let org of organizations" [value]="org.value">
+                        {{org.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error >Please choose an Organization</mat-error>
+                </mat-form-field>
+            </mat-card-content>
+        </form>
+    </div>
+    <ng-template #orgMemTemp>
+        <table class="dep-org-info">
+            <tr>
+                <td>
+                    Dept Name :
+                </td>
+                <td>
+                    {{selectedDeptName}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Dept Description :
+                </td>
+                <td>
+                    {{selectedDeptDesc}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Org Name :
+                </td>
+                <td>
+                    {{selectedOrgName}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Org Description :
+                </td>
+                <td>
+                    {{selectedOrgDesc}}
+                </td>
+            </tr>
+        </table>
+    </ng-template>
+
+    <div *ngIf="totalTicketsCount > 0; else no_tickets">
+        <pie-chart class="pie-chart" [width]="300"
+                [height]="300"
+                [values]="values"
+                [labels]="labels"
+                [colors]="colors"
+                (onClick)="onClick($event)">
+        </pie-chart>
+        <table class="stats-info">
+            <tr *ngFor="let stats of labels; let i=index">
+                <td>
+                    {{stats}}
+                </td>
+                <td>
+                    {{values[i]}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Total no. of tickets
+                </td>
+                <td>
+                    {{totalTicketsCount}}
+                </td>
+            </tr>
+        </table>
+        <div class="tckts-info" >
+            <div *ngIf="selectedTicketStatus !== undefined">
+                <table class="info-header">
+                    <tr>
+                        <td>{{labels[selectedTicketStatus]}}</td>
+                        <td><input [(ngModel)]="searchQuery" matInput placeholder="filter" #searchInput></td>
+                        <td></td>
+                        <td>My Bookmarks<mat-icon [ngClass]="{'disable-icon': !isSearchForBookmark}" (click)="onBookmarkStateChange()" style="cursor: pointer">{{isSearchForBookmark ? 'bookmark': 'bookmark_border'}}</mat-icon></td>
+                    </tr>
+                </table>
+
+                <div class="sdiv">
+                <table *ngIf="ticketsDetails.length > 0; else no_tickets" class="scrolldown">
+
+                    <tr>
+                        <th>
+                            SNo
+                        </th>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Content
+                        </th>
+                        <th>
+                            Customer Name
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                    <tr *ngFor="let ticket of ticketsDetails; let i = index">
+                        <td>
+                            {{i+1}}
+                        </td>
+                        <td>
+                            {{ticket.title}}
+                        </td>
+                        <td [innerHTML]="ticket.content">
+                            
+                        </td>
+                        <td>
+                            {{ticket.createdUser}}
+                        </td>
+                        <td>
+<<<<<<< HEAD
+                            <mat-icon [ngClass]="{'disable-icon': !ticket.isViewable}" style="cursor: pointer" (click)="updateAction('isViewable',ticket)">remove_red_eye</mat-icon>
+                            <mat-icon [ngClass]="{'disable-icon': !ticket.isEditable}"  style="cursor: pointer" (click)="updateAction('isEditable',ticket)">edit</mat-icon>
+                            <mat-icon [ngClass]="{'disable-icon': !ticket.isBookMarked}" style="cursor: pointer"  (click)="updateAction('isBookMarked',ticket)">{{ticket.isBookMarked ? 'bookmark': 'bookmark_border'}}</mat-icon>
+=======
+                            <mat-icon [ngClass]="{'disable-icon': !ticket.isViewable}" (click)="updateAction('isViewable',ticket)">remove_red_eye</mat-icon>
+                            <mat-icon [ngClass]="{'disable-icon': !ticket.isEditable}" (click)="updateAction('isEditable',ticket)">edit</mat-icon>
+                            <mat-icon [ngClass]="{'disable-icon': !ticket.isBookMarked}" (click)="updateBookMarkStatus(ticket)">{{ticket.isBookMarked ? 'bookmark': 'bookmark_border'}}</mat-icon>
+>>>>>>> 28545f8dc6f624784e154f3fd5838d3515518874
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #no_tickets>
+        <span *ngIf="pieChartDetailsRequested" class="no-tickets">
+            No Tickets found
+        </span>
+    </ng-template>
+</div>

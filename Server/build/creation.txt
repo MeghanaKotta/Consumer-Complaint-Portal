@@ -1,0 +1,258 @@
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Server version:               8.0.23 - MySQL Community Server - GPL
+-- Server OS:                    Win64
+-- HeidiSQL Version:             11.2.0.6213
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+-- Dumping database structure for tickethandling
+DROP DATABASE IF EXISTS `tickethandling`;
+CREATE DATABASE IF NOT EXISTS `tickethandling` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `tickethandling`;
+
+-- Dumping structure for table tickethandling.departments
+DROP TABLE IF EXISTS `departments`;
+CREATE TABLE IF NOT EXISTS `departments` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `depname` varchar(50) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table tickethandling.departments: ~4 rows (approximately)
+DELETE FROM `departments`;
+/*!40000 ALTER TABLE `departments` DISABLE KEYS */;
+INSERT INTO `departments` (`id`, `depname`) VALUES
+	(1, 'Clothing'),
+	(2, 'Gaming'),
+	(3, 'Groceries'),
+	(4, 'Fossil fuels');
+/*!40000 ALTER TABLE `departments` ENABLE KEYS */;
+
+-- Dumping structure for procedure tickethandling.getRolenameOnRoleId
+DROP PROCEDURE IF EXISTS `getRolenameOnRoleId`;
+DELIMITER //
+CREATE PROCEDURE `getRolenameOnRoleId`(
+	IN `roleid` INT
+)
+BEGIN
+	
+	SELECT r.rolename FROM roletbl r WHERE r.id = @roleid ;
+	
+END//
+DELIMITER ;
+
+-- Dumping structure for table tickethandling.mngraccess
+DROP TABLE IF EXISTS `mngraccess`;
+CREATE TABLE IF NOT EXISTS `mngraccess` (
+  `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `key` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table tickethandling.mngraccess: ~1 rows (approximately)
+DELETE FROM `mngraccess`;
+/*!40000 ALTER TABLE `mngraccess` DISABLE KEYS */;
+INSERT INTO `mngraccess` (`username`, `key`) VALUES
+	('admin', 'admin');
+/*!40000 ALTER TABLE `mngraccess` ENABLE KEYS */;
+
+-- Dumping structure for table tickethandling.organizations
+DROP TABLE IF EXISTS `organizations`;
+CREATE TABLE IF NOT EXISTS `organizations` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `depid` int DEFAULT NULL,
+  `orgname` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table tickethandling.organizations: ~11 rows (approximately)
+DELETE FROM `organizations`;
+/*!40000 ALTER TABLE `organizations` DISABLE KEYS */;
+INSERT INTO `organizations` (`id`, `depid`, `orgname`) VALUES
+	(1, 4, 'Hp petroleum'),
+	(2, 4, 'Bharat Gas'),
+	(3, 4, 'Hmc oil refineries'),
+	(4, 1, 'Myntra'),
+	(5, 1, 'Flipkart'),
+	(6, 1, 'Snapdeal'),
+	(7, 1, 'GAP'),
+	(8, 3, 'Walmart'),
+	(9, 3, 'Reliance'),
+	(10, 2, 'XBOX'),
+	(11, 2, 'Alien Gaming Inc');
+/*!40000 ALTER TABLE `organizations` ENABLE KEYS */;
+
+-- Dumping structure for table tickethandling.roletbl
+DROP TABLE IF EXISTS `roletbl`;
+CREATE TABLE IF NOT EXISTS `roletbl` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `rolename` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table tickethandling.roletbl: ~2 rows (approximately)
+DELETE FROM `roletbl`;
+/*!40000 ALTER TABLE `roletbl` DISABLE KEYS */;
+INSERT INTO `roletbl` (`id`, `rolename`) VALUES
+	(1, 'Manager'),
+	(2, 'OrgMember'),
+	(3, 'Customer');
+/*!40000 ALTER TABLE `roletbl` ENABLE KEYS */;
+
+-- Dumping structure for table tickethandling.sessiondetails
+DROP TABLE IF EXISTS `sessiondetails`;
+CREATE TABLE IF NOT EXISTS `sessiondetails` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `userid` int DEFAULT NULL,
+  `sessionkey` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `loggedinat` datetime DEFAULT NULL,
+  `loggedoutat` datetime DEFAULT NULL,
+  `active` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table tickethandling.sessiondetails: ~20 rows (approximately)
+DELETE FROM `sessiondetails`;
+/*!40000 ALTER TABLE `sessiondetails` DISABLE KEYS */;
+INSERT INTO `sessiondetails` (`id`, `userid`, `sessionkey`, `loggedinat`, `loggedoutat`, `active`) VALUES
+	(27, 8, 'B92gLYIZ1W5xFC5/8wOnLNVnDLZ7EVpVR36a8wouNgqe0bIKYCgPggO0+EuLU9Y2', '2022-07-12 07:21:11', NULL, 0),
+	(28, 8, 'pbkm/ZBhOWWkAXNAC+Uy84p4Lqnud7aEiiiMLp9ZoqXMw2g2Okey3LDETiHnazD8', '2022-07-12 07:24:10', NULL, 0),
+	(29, 8, '+feymB0bcgkneySCiLzDzGMSRrzk8EBx3v4RM43J4LucNeloASVWE1q7OfEY36pA', '2022-07-12 07:41:19', NULL, 0),
+	(30, 8, 'z1Rs8tLUVdgY0KV6lPynVsZP4VhFsUyKRtfKIUp/9S6DeqilRHwSrkokidDKLMUL', '2022-07-12 07:43:38', NULL, 0),
+	(31, 8, '7MCey8L1W+MYI4dQzX31g1QUI42q4oPyyvm/BJU1Qwz49mYrXdQDNiUDtE/Q/GWd', '2022-07-12 09:15:30', NULL, 0),
+	(32, 8, 'fuKmnlD5A0P0ThlImX9XJbvbeY/d/wxagt3TuT4pQfe/CNtpoYYptYABMgywjIbn', '2022-07-12 09:18:22', NULL, 0),
+	(33, 8, 'CLY/nCB0gWl9OXg9UUPd7lXd6+rZ/DwnWgazDFbawIoAGz4fJgtFIr3t+YQBMhwv', '2022-07-12 09:20:38', NULL, 0),
+	(34, 8, 'z0TVOBuVJVC+GxBpC1KGzl1Rs9XeKHlqHxXhbjWGmw9sbxEYWhsKaEF98RGZhJjs', '2022-07-12 09:21:42', NULL, 0),
+	(35, 8, 'tPToSch7gGfhGFE7MYuY2Pkq4d4Go76DQR8tW56MbfemQ7AnnFmNnoo5Eyum/6LQ', '2022-07-12 09:26:47', NULL, 0),
+	(36, 8, 'PKGfFyAbO7Ekye4cRqtcIcwAgCuukYCuA6eQkcnXxG2d2MrnfmEEmO+bK8NTdeWi', '2022-07-12 09:27:11', NULL, 0),
+	(37, 8, 'IrBmfMYIUweDmIMDtBvqVmVH2yJS34wEG8CbrBGz7YfmLY3VA/UCniWWboBEXn1l', '2022-07-12 09:36:06', NULL, 0),
+	(38, 8, 'TqfLekZRha97MO5nyD+tLl1SM6W8PKKt8Co7td5mfpdkARKvIVky+SsUsesCoFur', '2022-07-13 01:39:24', NULL, 0),
+	(39, 7, 'Y4QCNPpxUzbtzsGo5zrlBUtV+yjVj1EfNwRDiJw0sZQTFdA3nL4ybT7noQpIUM8W', '2022-07-15 03:52:02', NULL, 0),
+	(40, 6, 'oMTHl0x1mTdAQI8uCE+E69l7qETMRi/reouqHZnFGoCHO+se1EcD27gACCdDEJIx', '2022-07-15 04:23:58', NULL, 0),
+	(41, 6, 'Lhl9oQzUFmz5Jkn6+FOAXXin8QWsKl9pFGnfsOID0q8Js8mhItSGlHmiMQS8WPvb', '2022-07-15 04:24:43', NULL, 0),
+	(42, 6, 'OCNy0I7i/nLHd6buCkl5YyrQcJBeJha15F33WqYWNMMsKaoyNczjJpKs854j+R/r', '2022-07-15 04:26:34', NULL, 0),
+	(43, 6, '50e0DU1bLc0ws/fURCCXuRysjK25Gy3Q1YjiF04bu/bZWg0u4NiGEQ9pzz2tHdqC', '2022-07-15 05:00:50', NULL, 1),
+	(44, 6, 'N9e7KjML1FopM9a4wjPHtpPQbOeh9bIW/GoRXyjTIvnEC8nkxEb9vXjynpvzuqdN', '2022-07-16 03:29:35', NULL, 1),
+	(45, 6, '9VspiyRkFWVfOAN2/8vYaSrRh6eS4petGLMsoQD74MVD0yudR8U7XPPofDABB/ym', '2022-07-16 03:30:56', NULL, 1),
+	(46, 6, 'T6YWbaHPbHc5c/r4T9od60y4CP1BXZSvqvF1MDwY7c0cYap1muJ54wfhoeAUqJj7', '2022-07-16 03:32:28', NULL, 1),
+	(47, 6, 'sec9maMN8tI7PeKzO+IskBsG/zz5pWaEweDm1wGwzOQx8wAdoNJGvt9eBJLu1cMv', '2022-07-16 03:34:22', NULL, 1),
+	(48, 6, 'bLMFsAf9TZWwtQymzs2zaLQ6CUf1y5iEoNNOjLQj9oU+1S6Ako0x1DaLLRAiYP4u', '2022-07-18 09:09:02', NULL, 1),
+	(49, 7, 'oFMsyjiBZz+LO+dGaVE8Xov0JbNfD/v0JJp7XHsoa1t2KQDjIj/jNKeEGDWP5G/m', '2022-07-30 10:42:50', NULL, 1),
+	(50, 7, 'BnlYTv5e8ZvvAmGFuqS+z+9efbpny0KYQDfZbsjpuKFSR7AWdNokkiOxdu9iteFq', '2022-07-30 10:48:15', NULL, 1);
+/*!40000 ALTER TABLE `sessiondetails` ENABLE KEYS */;
+
+-- Dumping structure for table tickethandling.tags
+DROP TABLE IF EXISTS `tags`;
+CREATE TABLE IF NOT EXISTS `tags` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table tickethandling.tags: ~0 rows (approximately)
+DELETE FROM `tags`;
+/*!40000 ALTER TABLE `tags` DISABLE KEYS */;
+INSERT INTO `tags` (`id`, `name`) VALUES
+	(1, 'Wrong Product');
+/*!40000 ALTER TABLE `tags` ENABLE KEYS */;
+
+-- Dumping structure for table tickethandling.ticket
+DROP TABLE IF EXISTS `ticket`;
+CREATE TABLE IF NOT EXISTS `ticket` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `ticketid` int DEFAULT NULL,
+  `currentassigneeuserid` int NOT NULL DEFAULT '0',
+  `title` longtext NOT NULL,
+  `content` longtext NOT NULL,
+  `workdone` longtext,
+  `notes` longtext,
+  `imagepath` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `updatedon` datetime DEFAULT NULL,
+  `assignedbyuserid` int DEFAULT NULL,
+  `assignedon` datetime DEFAULT NULL,
+  `assignedbyroleid` int DEFAULT NULL,
+  `closedbyuserid` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `closedbyroleid` int DEFAULT NULL,
+  `active` int DEFAULT NULL,
+  `closedon` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table tickethandling.ticket: ~0 rows (approximately)
+DELETE FROM `ticket`;
+/*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
+
+-- Dumping structure for table tickethandling.ticketmetadata
+DROP TABLE IF EXISTS `ticketmetadata`;
+CREATE TABLE IF NOT EXISTS `ticketmetadata` (
+  `ticketid` int NOT NULL AUTO_INCREMENT,
+  `creatoruserid` int DEFAULT NULL,
+  `createdat` datetime DEFAULT NULL,
+  `creatorroleid` bigint DEFAULT NULL,
+  `orgid` int DEFAULT NULL,
+  `status` int DEFAULT NULL,
+  `tags` longtext,
+  `depid` int DEFAULT NULL,
+  PRIMARY KEY (`ticketid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table tickethandling.ticketmetadata: ~0 rows (approximately)
+DELETE FROM `ticketmetadata`;
+/*!40000 ALTER TABLE `ticketmetadata` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ticketmetadata` ENABLE KEYS */;
+
+-- Dumping structure for table tickethandling.userdetails
+DROP TABLE IF EXISTS `userdetails`;
+CREATE TABLE IF NOT EXISTS `userdetails` (
+  `userid` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `emailid` varchar(50) DEFAULT NULL,
+  `password` varchar(500) DEFAULT NULL,
+  `dob` datetime DEFAULT NULL,
+  `roleid` int DEFAULT NULL,
+  `createdby` int DEFAULT NULL,
+  `avatarid` int DEFAULT NULL,
+  PRIMARY KEY (`userid`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table tickethandling.userdetails: ~8 rows (approximately)
+DELETE FROM `userdetails`;
+/*!40000 ALTER TABLE `userdetails` DISABLE KEYS */;
+INSERT INTO `userdetails` (`userid`, `username`, `emailid`, `password`, `dob`, `roleid`, `createdby`, `avatarid`) VALUES
+	(5, 'vamsiii', 'vamsiii@gmail.com', 'zEhq/Nf9IuuDN3XWL+o54A==', '1997-07-22 19:00:00', 3, -1, NULL),
+	(6, 'vamsi', 'vamsiii5@gmail.com', 'zEhq/Nf9IuuDN3XWL+o54A==', '1997-07-22 19:00:00', 3, -1, NULL),
+	(7, 'mgr', 'mgr@gmail.com', 'zEhq/Nf9IuuDN3XWL+o54A==', '1997-07-22 19:00:00', 1, -1, NULL),
+	(8, 'bhargav', 'b@gmail.com', 'JTvohLiLKLY0cKyzpHtBWw==', '2021-08-06 19:00:00', 3, -1, NULL),
+	(9, 'bhargavtt', 'bh@kusdghv.com', 'JTvohLiLKLY0cKyzpHtBWw==', '2022-07-28 19:00:00', 1, -1, NULL),
+	(10, 'mger', 'mger@gmail.com', 'zEhq/Nf9IuuDN3XWL+o54A==', '1997-07-22 19:00:00', 1, -1, NULL),
+	(11, 'mgedr', 'mgeer@gmail.com', 'zEhq/Nf9IuuDN3XWL+o54A==', '1997-07-22 19:00:00', 3, -1, NULL),
+	(12, 'mgkhedr', 'mgeerkh@gmail.com', 'WLAPu7j1gjauTx5pB0Dc+A==', '1997-07-22 19:00:00', 3, -1, NULL),
+	(13, 'SYSTEM', 'system@self.com', 'WfsguiHUYHjkfgsjk9==r8347+', NULL, 1, -1, NULL);
+/*!40000 ALTER TABLE `userdetails` ENABLE KEYS */;
+
+-- Dumping structure for table tickethandling.userorgmap
+DROP TABLE IF EXISTS `userorgmap`;
+CREATE TABLE IF NOT EXISTS `userorgmap` (
+  `id` int DEFAULT NULL,
+  `userid` int DEFAULT NULL,
+  `orgid` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table tickethandling.userorgmap: ~0 rows (approximately)
+DELETE FROM `userorgmap`;
+/*!40000 ALTER TABLE `userorgmap` DISABLE KEYS */;
+/*!40000 ALTER TABLE `userorgmap` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;

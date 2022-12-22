@@ -1,0 +1,31 @@
+.avatar{
+    width: 75px;
+    border-radius: 50%;
+    margin: 15px;
+}
+
+.selected-avatar {
+    border-style: solid;
+    border-color: green;
+}
+
+.avatar-holder{
+    max-width: 80%;
+    padding: 50px;
+    margin: 0 auto;
+}
+
+.update-btn{
+    margin: 100px;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 30px;
+    float: right;
+}

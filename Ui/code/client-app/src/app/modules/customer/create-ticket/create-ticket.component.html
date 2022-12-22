@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="heading">Create Ticket</div>
+    <form [formGroup]="createTicketForm" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
+        <mat-form-field  class="full-width" appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput [(ngModel)]="titleTxt" formControlName="title">
+            <mat-error
+                *ngIf="createTicketForm.get('title')?.invalid && (createTicketForm.get('title')?.dirty || createTicketForm.get('title')?.touched) && createTicketForm.get('title')?.errors?.required">
+                Title is required
+            </mat-error>
+        </mat-form-field>
+
+        <quill-editor [(ngModel)]="htmlContent" placeholder="Enter Text" [styles]="editorStyle" formControlName="editor" [modules]="quillConfiguration">
+        </quill-editor>
+        <div class="form-field1">
+            <mat-form-field appearance="outline">
+                <mat-label>Tags</mat-label>
+                <mat-select formControlName="tag" [(ngModel)]="selectedTags" multiple>
+                    <mat-option *ngFor="let tag of tags" [value]="tag.id">
+                        {{tag.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Department</mat-label>
+                <mat-select formControlName="department" [(value)]="selectedDept" (selectionChange)="onDeptChange($event)">
+                    <mat-option *ngFor="let dept of departments" [value]="dept.value">
+                        {{dept.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Organization</mat-label>
+                <mat-select [(value)]="selectedOrg" formControlName="organization">
+                    <mat-option *ngFor="let org of organizations" [value]="org.value">
+                        {{org.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-icon>whatshot</mat-icon>
+
+        </div>
+        <button class="submit-button" color="primary" [disabled]="!createTicketForm.valid" type="submit"  mat-raised-button mat-button>
+            Submit
+        </button>
+
+    </form>
+</div>

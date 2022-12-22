@@ -1,0 +1,49 @@
+
+.container {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.container .mat-card {
+	padding: 0px 45px 10px;
+    border-radius: 8px;
+    max-width: 330px;
+    margin-top: 29px;
+}
+
+.container mat-card-title {
+    text-align: center;
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+}
+.container .full-width {
+	width: 100%;
+}
+
+.form-field1 {
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer {
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.dob-field {
+	width: 120px;
+}
+
+.card-container {
+	box-shadow: none;
+	background-color: white;
+}
+
+.card-content {
+	max-height: calc(100vh - 245px);
+    overflow-y: auto;
+    padding-right: 10px;
+}

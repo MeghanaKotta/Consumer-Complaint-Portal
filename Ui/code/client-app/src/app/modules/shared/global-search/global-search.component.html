@@ -1,0 +1,5 @@
+<mat-icon class="search-icon">search</mat-icon>
+<input class="search-input" [(ngModel)]="searchQuery" matInput placeholder="Search Ticket" style="max-width: 200px; height: 1.5em;" #input>
+<div *ngIf="searchResult &&  searchResult.length > 0 && searchQuery != ''" class="search-result">
+    <app-search-result [data]="searchResult"></app-search-result>
+</div>

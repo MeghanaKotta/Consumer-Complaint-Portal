@@ -1,0 +1,19 @@
+<div class="header-item">
+    <div>
+        <div class="avatarId" (click)="toggleUserMenu()">
+            <div class="image-cropper">
+                <img [src]="avatarPath" class="avatar"/>
+            </div>
+            <span style="bottom: 0.3em; position: relative; color:white;">
+                {{userdetails?.username}}
+            </span>
+        </div>
+    </div>
+    <div *ngIf="showUserMenu"  class="menu-items-container">
+        <div class="menu-item-list">
+            <li class="listItems" (click)="doLogout()">Logout</li>
+            <!-- <li class="listItems" (click)="showChangePwdView()" *ngIf="userdetails['roleid']!=3">Change Password</li> -->
+            <li class="listItems" (click)="showUpdateAvatar()"  *ngIf="userdetails['roleid']!=3">Update Avatar</li>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,5 @@
+<div *ngIf="data && data.length > 0" class="result-content">
+    <li *ngFor="let ticket of data" class="search-item"
+    (click)="onSelectTicket(ticket)" [innerHTML]="ticket.content">
+    </li>
+</div>

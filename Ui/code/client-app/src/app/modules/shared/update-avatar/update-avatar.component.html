@@ -1,0 +1,10 @@
+<div class="avatar-holder">
+    <img class="avatar" *ngFor="let avatarSrc of avatarsPath;let i = index"
+    [class.selected-avatar] = "selectedAvatarid == (i+1)"
+     [src]="avatarSrc" (click)="onSelect(i+1)">
+</div>
+<button class="update-btn"[disabled]="!isChanged" 
+type="button" mat-button (click)="updateAvatar()" mat-raised-button color="primary" color="primary" mat-button>Submit</button>
+
+
+

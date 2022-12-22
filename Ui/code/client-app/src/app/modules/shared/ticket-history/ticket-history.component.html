@@ -1,0 +1,207 @@
+<div *ngIf="ticketsData.length > 0; else no_tickets" class="ticket-history">
+    <div *ngIf="openTickets.length > 0">
+        <h2>Open Tickets</h2>
+        <table>
+            <tr>
+                <th>
+                    SNo
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    content
+                </th>
+                <th>
+                    Created On
+                </th>
+                <th>
+                    Tagged to
+                </th>
+            </tr>
+            <tr *ngFor="let ticket of openTickets;let i = index;">
+                <td>
+                    {{i+1}}
+                </td>
+                <td>
+                    {{ticket.title}}
+                </td>
+                <td [innerHTML]="ticket.content">
+                    
+                </td>
+                <td>
+                    {{ticket.assignedon | date}}
+                </td>
+                <td>
+                    <div> <img *ngFor="let imgsrc of breakTags(ticket['tags'])" [src]="imgsrc" class="tags-icon"/></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div *ngIf="progressTickets.length > 0">
+        <h2>Inprogress Tickets</h2>
+        <table *ngIf="isCustomer; else inpro_noncustomer">
+            <tr>
+                <th>
+                    SNo
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    content
+                </th>
+                <th>
+                    Current Assignee
+                </th>
+               
+                <th>
+                    Tagged to
+                </th>
+            </tr>
+            <tr *ngFor="let ticket of progressTickets;let i = index;">
+                <td>
+                    {{i+1}}
+                </td>
+                <td>
+                    {{ticket.title}}
+                </td>
+                <td [innerHTML]="ticket.content">
+                </td>
+                <td>
+                    <img [src]="getAvatarPath(ticket.currentassigneeavatarid)" class="avatar" />
+                    {{ticket.currentassignee}}
+                </td>
+              
+                <td>
+                    <div> <img *ngFor="let imgsrc of breakTags(ticket['tags'])" [src]="imgsrc" class="tags-icon"/></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div *ngIf="closedTickets.length > 0">
+        <h2>Closed Tickets</h2>
+        <table *ngIf="isCustomer; else closed_noncustomer">
+            <tr>
+                <th>
+                    SNo
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    content
+                </th>
+                <th>
+                    Closed By
+                </th>
+                <th>
+                    Closed On
+                </th>
+                <th>
+                    Tagged To
+                </th>
+            </tr>
+            <tr *ngFor="let ticket of closedTickets;let i = index;">
+                <td>
+                    {{i+1}}
+                </td>
+                <td>
+                    {{ticket.title}}
+                </td>
+                <td [innerHTML]="ticket.content">
+                </td>
+                <td>
+                    <img [src]="getAvatarPath(ticket.currentassigneeavatarid)" class="avatar"/>
+                    {{ticket.currentassignee}}
+                </td>
+                <td>
+                    {{ticket.closedon | date}}
+                </td>
+                <td>
+                    <div> <img *ngFor="let imgsrc of breakTags(ticket['tags'])" [src]="imgsrc" class="tags-icon"/></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<ng-template #no_tickets>
+    <span>No tickets found!</span>
+</ng-template>
+<ng-template #inpro_noncustomer>
+    <table >
+        <tr>
+            <th>
+                SNo
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                content
+            </th>
+            <th>
+                Assigned On
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+        <tr *ngFor="let ticket of progressTickets;let i = index;">
+            <td>
+                {{i+1}}
+            </td>
+            <td>
+                {{ticket.title}}
+            </td>
+            <td [innerHTML]="ticket.content">
+                
+            </td>
+            <td>
+                {{ticket.assignedon | date}}
+            </td>
+            <td>
+                <mat-icon [ngClass]="{'disable-icon': !ticket.isEditable}" (click)="updateAction('isEditable',ticket)">edit</mat-icon>
+            </td>
+        </tr>
+    </table>
+</ng-template>
+<ng-template #closed_noncustomer>
+    <table >
+        <tr>
+            <th>
+                SNo
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                content
+            </th>
+            <th>
+                Closed On
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+        <tr *ngFor="let ticket of closedTickets;let i = index;">
+            <td>
+                {{i+1}}
+            </td>
+            <td>
+                {{ticket.title}}
+            </td>
+            <td [innerHTML]="ticket.content">
+            </td>
+            <td>
+                {{ticket.closedon | date}}
+            </td>
+            <td>
+                <mat-icon [ngClass]="{'disable-icon': !ticket.isViewable}" (click)="updateAction('isViewable',ticket)">remove_red_eye</mat-icon>
+                <mat-icon [ngClass]="{'disable-icon': !ticket.isViewable}" (click)="updateAction('isViewable',ticket)">edit</mat-icon>
+
+            </td>
+        </tr>
+    </table>
+</ng-template>

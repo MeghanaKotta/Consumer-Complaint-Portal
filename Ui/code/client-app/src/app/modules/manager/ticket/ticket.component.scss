@@ -1,0 +1,251 @@
+.container {
+    color: #575353;
+    padding: 0px 20px;
+    max-height: calc(100vh - 110px);
+    overflow: auto;
+}
+
+.container mat-form-field {
+    font-size: 12px;
+    width: 100%;
+}
+
+.container .full-width {
+    width: 100%;
+}
+
+.title-section {
+    display: flex;
+    padding: 0.5rem 0;
+    text-transform: capitalize;
+}
+
+.header {
+    font-size: 16px;
+}
+
+.title {
+    flex: 1;
+    font-size: 2rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.created-time {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.description {
+    padding: 0.5rem;
+}
+
+.desc {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.ticket-content {
+    font-weight: bold;
+    font-size: 18px;
+    display: inline-block
+}
+
+.tags-icon{
+    width: 30px;
+    border-radius: 50%;
+}
+
+.tags-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+}
+
+.bookmark {
+    vertical-align: bottom;
+}
+
+.content {
+    padding: 0.5rem;
+    overflow: auto;
+}
+
+.tooltip {
+    position: relative;
+}
+
+.tooltip-text {
+    border-radius: 8px;
+    display: none;
+    position: absolute;
+    z-index: 100;
+    background-color: #575353;
+    padding: 5px;
+    color: #ffffff;
+    bottom: 30px;
+    right: 30px;
+    white-space: nowrap;
+}
+
+.tooltip:hover span.tooltip-text {
+    display: block;
+}
+
+table {
+    border-collapse: collapse;
+    -webkit-box-shadow: 1px 1px 10px 0px rgba(50, 50, 50, 0.7);
+    -moz-box-shadow: 1px 1px 10px 0px rgba(50, 50, 50, 0.7);
+    box-shadow: 1px 1px 10px 0px rgba(50, 50, 50, 0.7);
+}
+
+.ticket-table {
+    margin: auto;
+    max-height: 300px;
+    table-layout: fixed;
+    border-collapse: collapse;
+    padding: 0.5rem;
+
+    th,
+    td {
+        padding: 5px;
+        text-align: left;
+        border-bottom-width: 0.5px;
+        border-bottom-style: solid;
+        border-bottom-color: #0000001f;
+        width: 149px;
+        text-align: center;
+    }
+
+    td {
+        // color: #000000de;
+        font-size: 12px;
+        height: 25px;
+    }
+
+    td:nth-child(1),
+    th:nth-child(1) {
+        min-width: 50px;
+        padding-left: 24px;
+    }
+
+    td:nth-child(5),
+    th:nth-child(5) {
+        min-width: 50px;
+        padding-right: 24px;
+    }
+
+    td:nth-child(2),
+    th:nth-child(2),
+    td:nth-child(3),
+    th:nth-child(3),
+    td:nth-child(4),
+    th:nth-child(4) {
+        min-width: 200px;
+    }
+
+    thead {
+        color: #0000008a;
+        text-align: center;
+
+        tr {
+            display: block;
+            position: relative;
+        }
+
+        th {
+            font-size: 12px;
+            font-weight: 500;
+            height: 30px;
+            width: 148px;
+            text-align: center;
+        }
+    }
+
+    tbody {
+        display: block;
+        max-height: 300px;
+    }
+}
+
+.footer {
+    // position: absolute;
+    bottom: 0px;
+    margin: auto;
+    padding: 0.5rem;
+    width: calc(100% - 40px);
+}
+
+.form-field {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.field-col1 {
+    max-width: 28%;
+}
+
+.field-col2 {
+    max-width: 50%;
+}
+
+.field-col3 {
+    max-width: 20%;
+
+    .radio-group {
+        display: flex;
+        flex-direction: column;
+        font-size: 12px;
+        margin: 15px 0;
+    }
+    .radio-button {
+        margin-top: 10px;
+    }
+}
+
+.field-col2-row1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.field-col2-row1 mat-form-field {
+    width: 49%
+}
+
+
+.radio-button
+{
+    margin-left: 15px !important;
+}
+
+@media (orientation: portrait) {
+    .title {
+        font-weight: bold;
+        justify-content: flex-start;
+    }
+
+    .created-time {
+        flex: auto;
+    }
+
+    .form-field {
+        flex-direction: column;
+    }
+
+    .field-col1 {
+        max-width: 100%;
+    }
+
+    .field-col2 {
+        max-width: 100%;
+    }
+
+    .field-col3 {
+        max-width: 100%;
+    }
+}

@@ -1,0 +1,14 @@
+.chart {
+  margin-left: 24px;
+    padding-top: 18px;
+}
+
+.tip {
+    background-color:black;
+    border:0px solid black;
+    border-radius: 5px;
+    position:fixed;
+    display:none;
+    top:100px;
+}
+
